@@ -1,0 +1,122 @@
+Database_Routing_Task:
+  description: >
+    Receive a structured request describing a database operation (with inputs like table name, fields, values, and conditions),
+    determine whether the operation is an insert, read, update, or delete,
+    validate the input against the database schema and business rules,
+    then route the task to the appropriate specialized agent (Inserter, Reader, Updater, or Deleter).
+    Ensure schema compliance, data integrity, and proper logging before dispatching any operation.
+  expected_output: >
+    - Operation Type (Insert_task / Get_task / Update_task / Delete_task)
+    - Target Agent: Inserter / Reader / Updater / Deleter
+    - Validated Parameters: Structured and sanitized input for the agent
+    - Log Entry: Description of the operation routed
+
+
+Insert_task:
+  description: >
+    This task is routed to the Inserter agent by the DatabaseManager.
+    Insert a new record into the specified table in the TalentCopilot PostgreSQL database.
+    You will be provided with the target table name and a dictionary of column-value pairs to insert.
+
+    Example input:
+      table: "Candidates"
+      values: {
+        "id": "12345678-1234-1234-1234-123456789018"
+        "FirstName": "Abdallah",
+        "LastName": "Youssef",
+        "email": "abdallahyoussef33@gmail.com",
+        "PhoneNumber": "01003264712",
+        "LinkedInURL": "https://www.linkedin.com/in/abdallahyoussef33/",
+        "GithubURL": "https://github.com/abdallahyoussef33",
+        "status": "Processing"
+      } 
+
+    Raw SQL is prohibited. Use the structured `insert_data` MCP tool.
+
+
+  expected_output: >
+    A JSON response indicating whether the insertion was successful.
+    On success, return the inserted values.
+    On failure, return a JSON error message with the reason.
+
+
+Get_task:
+  description: >
+    This task is routed to the Reader agent by the DatabaseManager.
+    Extract specific data from the table in the TalentCopilot PostgreSQL database 
+    using selected columns and optional filtering conditions.
+
+    The agent must construct the query based on structured input — the table name, the columns to retrieve, 
+    and a dictionary of optional conditions. Avoid writing raw SQL. Use the select_data MCP tool 
+    to retrieve and return the results in structured JSON.
+
+        Raw SQL is prohibited. Use the structured `select_data` MCP tool.
+
+
+    Example input:
+    table: "Candidates"
+    columns: ["FirstName", "LastName", "Status"]
+    conditions: {"Status": "Processing"}
+
+    If no conditions are provided, return all rows with the selected columns.
+
+  expected_output: >
+    A JSON-formatted list of matching records with the selected columns. 
+    Handle and report any errors clearly.
+
+
+Update_task:
+  description: >
+    This task is routed to the Updater agent by the DatabaseManager.
+    Update one or more fields in a specific table within the TalentCopilot PostgreSQL database.
+    The agent receives the table name, a dictionary of fields to update (column: new_value), and
+    an optional dictionary of conditions to identify the records to be updated. If no conditions
+    are provided, the update will apply to all rows — use with caution.
+
+    Raw SQL is prohibited. Use the structured `update_data` MCP tool.
+
+  input_format:
+    table: str  
+    updates: dict  
+    conditions: Optional[dict]  
+  expected_output: >
+    A JSON object that confirms the update status, the updated fields, and where the update was applied.
+    If an error occurs, a descriptive error message is returned.
+
+
+Delete_task:
+  description: >
+    This task is routed to the Deleter agent by the DatabaseManager.
+    Permanently delete specific records from a given table in the TalentCopilot PostgreSQL database.
+    This task requires the table name and a dictionary of conditions to identify which rows to delete.
+    The agent must **never** delete all rows from a table unless explicitly instructed by a safe override 
+    mechanism (not implemented by default).
+
+    Raw SQL is prohibited. Use the structured `delete_data` MCP tool with the provided table name 
+    and conditions to safely perform the deletion.
+
+  input_format:
+    table: str
+    conditions: dict  
+
+  expected_output: >
+    A JSON object indicating whether the deletion was successful, how many rows were affected, and any error messages if applicable.
+
+
+
+extract_data:
+  description: >
+    Use the "Candidate JSON Parser Tool" to extract candidate data.
+    You MUST use the tool to perform this task.
+    Do not attempt to generate or guess the JSON content — the tool will read the correct file automatically.
+    the tool has the default path to the JSON file, no need to pass it.
+    Once the tool returns data, you MUST reply in this exact format:
+
+    ```
+    Thought: I now know the final answer.
+    Final Answer: <paste the structured JSON output from the tool here>
+    ```
+
+    Do not repeat tool calls. Do not repeat your thoughts. Just return the final answer once you have the data.
+  expected_output: >
+    Dictionaries for candidates, experiences, projects, skills, and jobs.

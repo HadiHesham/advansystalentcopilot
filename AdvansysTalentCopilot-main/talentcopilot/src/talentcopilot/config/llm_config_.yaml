@@ -1,0 +1,41 @@
+# LLM Configuration for TalentCopilot
+# Choose your preferred LLM provider and model
+
+# Current LLM Provider (uncomment one)
+llm_provider: "openai"  # Options: openai, anthropic, cohere, google
+
+# OpenAI Configuration
+openai:
+  model: "gpt-4o-mini"
+  temperature: 0.7
+  api_key_env: "OPENAI_API_KEY"
+
+# Anthropic Configuration  
+anthropic:
+  model: "claude-3-5-sonnet-20241022"
+  temperature: 0.7
+  api_key_env: "ANTHROPIC_API_KEY"
+
+# Cohere Configuration
+cohere:
+  model: "command-r-plus"
+  temperature: 0.7
+  api_key_env: "COHERE_API_KEY"
+
+# Google Configuration
+google:
+  model: "gemini-1.5-flash"
+  temperature: 0.7
+  api_key_env: "GOOGLE_API_KEY"
+  
+groq:
+  model: llama3-70b-8192  # or mixtral-8x7b-32768
+  temperature: 0.3
+  api_key_env: GROQ_API_KEY
+  base_url: https://api.groq.com/openai/v1
+
+# Available Models by Provider:
+# OpenAI: gpt-4o, gpt-4o-mini, gpt-4-turbo, gpt-3.5-turbo
+# Anthropic: claude-3-5-sonnet-20241022, claude-3-opus-20240229, claude-3-sonnet-20240229
+# Cohere: command-r-plus, command-r, command-light
+# Google: gemini-1.5-flash, gemini-1.5-pro, gemini-pro 

@@ -1,0 +1,146 @@
+{
+  "candidate": {
+    "FirstName": "Nouman",
+    "LastName": "Ali",
+    "email": null,
+    "PhoneNumber": null,
+    "LinkedInURL": null,
+    "GithubURL": null,
+    "Address": null,
+    "Status": "Processing"
+  },
+  "skills": [
+    {
+      "SkillName": "Embedded Microcontroller Programming"
+    },
+    {
+      "SkillName": "PCB Design"
+    },
+    {
+      "SkillName": "Schematic Design"
+    },
+    {
+      "SkillName": "Client-Server Communication"
+    },
+    {
+      "SkillName": "IoT"
+    },
+    {
+      "SkillName": "Wi-Fi"
+    },
+    {
+      "SkillName": "Python"
+    },
+    {
+      "SkillName": "C/C++"
+    },
+    {
+      "SkillName": "MATLAB"
+    },
+    {
+      "SkillName": "Node-RED"
+    },
+    {
+      "SkillName": "Android Studio"
+    },
+    {
+      "SkillName": "Visual Studio Code"
+    },
+    {
+      "SkillName": "mikroC PRO for PIC"
+    },
+    {
+      "SkillName": "PlatformIO"
+    },
+    {
+      "SkillName": "Arduino IDE"
+    },
+    {
+      "SkillName": "STM32Cube IDE"
+    },
+    {
+      "SkillName": "PROTEUS"
+    },
+    {
+      "SkillName": "Eagle CAD"
+    },
+    {
+      "SkillName": "Raspberry Pi"
+    }
+  ],
+  "experience": [
+    {
+      "CompanyName": "National Institute of Electronics, ISB",
+      "Title": "RESEARCH OFFICER",
+      "Description": "Supervision of project life-cycle from planning, design and procurement to implementation. Designing and analyzing the schematics and PCBs of the projects. Programming the embedded micro-controllers related to the project.",
+      "StartDate": "2017-12-01",
+      "EndDate": "2021-09-30"
+    },
+    {
+      "CompanyName": "SEECS, NUST",
+      "Title": "RESEARCH ASSISTANT",
+      "Description": "R&D of Wi-Fi-based Smart Load Enabler device for making conventional sockets smart. Successful implementation of Client-Server Communication between multiple SLE devices. Human Presence-Based Automation of WISNET Lab at SEECS, NUST",
+      "StartDate": "2016-11-01",
+      "EndDate": "2017-10-31"
+    }
+  ],
+  "projects": [
+    {
+      "ProjectName": "IoT Based Smart Energy Meter",
+      "StartDate": null,
+      "EndDate": null,
+      "Title": null,
+      "Description": null
+    },
+    {
+      "ProjectName": "PIC18F4550 Development Board",
+      "StartDate": null,
+      "EndDate": null,
+      "Title": null,
+      "Description": null
+    },
+    {
+      "ProjectName": "6-Channel Smart Socked Based on ESP8266",
+      "StartDate": null,
+      "EndDate": null,
+      "Title": null,
+      "Description": null
+    },
+    {
+      "ProjectName": "RFID and Wi-Fi Door Lock based on ESP8266",
+      "StartDate": null,
+      "EndDate": null,
+      "Title": null,
+      "Description": null
+    },
+    {
+      "ProjectName": "Automatic Line Changeover based on Unit Consumption",
+      "StartDate": null,
+      "EndDate": null,
+      "Title": null,
+      "Description": null
+    },
+    {
+      "ProjectName": "Automatic Sliding-Door Control System",
+      "StartDate": null,
+      "EndDate": null,
+      "Title": null,
+      "Description": null
+    },
+    {
+      "ProjectName": "Power Monitoring System",
+      "StartDate": null,
+      "EndDate": null,
+      "Title": null,
+      "Description": null
+    },
+    {
+      "ProjectName": "Automatic Solar Switch for UPS",
+      "StartDate": null,
+      "EndDate": null,
+      "Title": null,
+      "Description": null
+    }
+  ],
+  "extracurricular": []
+}

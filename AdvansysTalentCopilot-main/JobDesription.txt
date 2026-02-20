@@ -1,0 +1,53 @@
+🧾 Job Title: Front-End Developer
+📍 Location:
+Cairo, Egypt (Hybrid – 3 days onsite, 2 days remote)
+
+📝 Job Description:
+We are looking for a skilled Front-End Developer to join our growing team. You will be responsible for translating design wireframes into high-quality, responsive, and performant web applications. The ideal candidate is proficient in modern JavaScript frameworks, has an eye for detail, and thrives in a fast-paced, collaborative environment.
+
+✅ Responsibilities:
+Develop responsive and dynamic user interfaces using React.js (or similar frameworks such as Vue or Angular).
+
+Collaborate with designers to implement UI/UX designs with pixel-perfect precision.
+
+Optimize web applications for maximum speed, scalability, and accessibility.
+
+Integrate with RESTful APIs and GraphQL backends.
+
+Work closely with backend developers and product managers to deliver new features.
+
+Participate in code reviews and maintain code quality and consistency.
+
+Troubleshoot and debug performance or compatibility issues across browsers and devices.
+
+🧠 Required Skills & Qualifications:
+Proven experience as a Front-End Developer (2+ years).
+
+Strong proficiency in HTML5, CSS3, and JavaScript (ES6+).
+
+Hands-on experience with React.js and its ecosystem (Redux, React Router, etc.).
+
+Familiarity with version control tools like Git.
+
+Understanding of cross-browser compatibility issues and responsive design principles.
+
+Experience with CSS preprocessors such as SASS or LESS.
+
+Knowledge of build tools like Webpack, Babel, or Vite.
+
+Strong attention to detail and a passion for clean, maintainable code.
+
+🌟 Nice to Have:
+Experience with TypeScript.
+
+Knowledge of Next.js, Tailwind CSS, or Styled Components.
+
+Familiarity with CI/CD pipelines and automated testing frameworks.
+
+Understanding of basic SEO principles for front-end optimization.
+
+Previous work in an Agile/Scrum environment.
+
+🎓 Education:
+Bachelor's degree in Computer Science, Engineering, or a related field.
+

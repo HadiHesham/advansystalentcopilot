@@ -1,0 +1,118 @@
+validate_and_classify_task:
+  description: >
+    Validate the file at {file_path} to determine if it's a supported CV format.
+
+    You have access to file validation tools that can help you check:
+    - File existence and readability
+    - File format compatibility (PDF, DOC/DOCX, PNG/JPG/TIFF)
+    - File integrity and corruption status
+
+    Analyze the file and provide a comprehensive validation report including:
+    - File type identification
+    - Validation status (valid/invalid)
+    - Any issues discovered
+    - Recommendations for processing
+
+    Use your judgment to determine the best approach for validation.
+  expected_output: >
+    A detailed validation report containing file information, validation status, 
+    and any recommendations for the next processing steps. Format this as a 
+    structured summary that can guide subsequent processing.
+
+error_reporting_task:
+  description: >
+    Based on the validation results from the previous task, determine if any 
+    error reporting is needed. 
+
+    Review the validation findings and:
+    - Log any errors or issues discovered during validation
+    - Create appropriate error reports if validation failed
+    - Document any warnings or concerns for the processing pipeline
+
+    Only create error reports when actual issues are found. If validation 
+    was successful, simply confirm no errors were detected.
+  expected_output: >
+    Error reporting status and any necessary error documentation. 
+    Include confirmation of successful validation or details of logged errors.
+  context: [validate_and_classify_task]
+
+pdf_text_extraction_task:
+  description: >
+    Extract text content from the validated PDF file using available extraction tools.
+
+    Based on the validation results from previous tasks, proceed with text extraction if appropriate.
+    You have access to:
+    - PDF validation tools
+    - Text extraction utilities
+    - Error logging capabilities
+
+    Approach the extraction methodically:
+    - Verify the PDF is ready for processing
+    - Extract text using the most appropriate method
+    - Handle any extraction challenges
+    - Provide clean, structured text output
+
+    Adapt your approach based on the specific characteristics of the file.
+  expected_output: >
+    Successfully extracted text content from the PDF file, formatted and 
+    structured for further analysis. Include extraction metadata and any 
+    processing notes.
+  context: [validate_and_classify_task]
+  output_file: output/pdf_raw_text.txt
+
+pdf_error_logging_task:
+  description: >
+    Monitor the PDF extraction process and handle any errors that occurred.
+
+    Review the extraction results and:
+    - Log any extraction errors or failures
+    - Document processing challenges
+    - Create error reports for failed extractions
+    - Confirm successful processing when appropriate
+
+    Focus on providing clear error documentation that can help improve 
+    the processing pipeline.
+  expected_output: >
+    Error logging status with details of any extraction issues logged 
+    or confirmation of successful processing.
+  context: [pdf_text_extraction_task]
+  output_file: output/error_pdf_report.md
+
+entity_extraction_formatting_task:
+  description: >
+    Extract HR-relevant entities (name, phone number, address, email, LinkedIn URL, GitHub URL, skills, experience, projects, extracurricular) from the cleaned text provided in the previous task's output (accessed via context).
+    Standardize the text by:
+    - Converting dates to YYYY-MM-DD format
+    - Lowercasing emails
+    - Trimming whitespace and removing special characters (e.g., '♂', '/envel⌢pe')
+    Clean noise by removing extra newlines and irrelevant formatting artifacts.
+    Extract entities verbatim using LLM-based NER, ensuring no alteration of original content.
+    Format the entities into a JSON object matching the schema:
+    {
+      "candidate": {"FirstName": "", "LastName": "", "email": "", "PhoneNumber": "", "LinkedInURL": "", "GithubURL": "", "Address": "", "Status": "Processing"},
+      "skills": [{"SkillName": ""}],
+      "experience": [{"CompanyName": "", "Title": "", "Description": "", "StartDate": "", "EndDate": ""}],
+      "projects": [{"ProjectName": "", "StartDate": "", "EndDate": "", "Title": "", "Description": ""}],
+      "extracurricular": [{"Name": "", "Description": "", "Location": "", "Date": ""}]
+    }
+    Save the JSON to the output file.
+  expected_output: >
+    A JSON file at output/candidate_data.json containing structured candidate data.
+  context: [pdf_text_extraction_task]
+  output_file: output/candidate_data.json
+
+entity_validation_reporting_task:
+  description: >
+    Validate the extracted entities from the previous task for completeness and accuracy.
+    Check:
+    - Email format (e.g., valid regex: ^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$)
+    - Phone number format (e.g., starts with '+' followed by digits)
+    - Presence of required fields (FirstName, LastName, email, PhoneNumber)
+    - Date consistency (StartDate before EndDate, valid YYYY-MM-DD format)
+    - Valid URLs for LinkedIn and GitHub
+    Log issues to output/error_entity_report.md without modifying the extracted data.
+    Return a JSON-formatted validation report with status and issues.
+  expected_output: >
+    A JSON-formatted validation report with validation_status ("valid" or "invalid") and issues list, with errors appended to output/error_entity_report.md.
+  context: [entity_extraction_formatting_task]
+  output_file: output/error_entity_report.mdx 

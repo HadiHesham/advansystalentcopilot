@@ -1,0 +1,52 @@
+EvaluateInterviewEligibility:
+  description: >
+    You are provided with the text contents of a compatibility report between job requirements and candidate profiles.
+
+    The report {MATCHRESULTS} summarizes how well each candidate matches the job description.
+    Your task is to read this report carefully and, based solely on the information provided, determine for each candidate whether they should be ACCEPTED for an interview or REJECTED.
+
+    Output your response in plain text using the following format for each candidate:
+
+    Candidate: [Full Name]
+    Decision: ACCEPTED or REJECTED
+    Reason: [Brief explanation based on the report]
+  expected_output: >
+    A plain text (.txt) report listing candidates with interview decisions and justifications, one block per candidate.
+  agent: AcceptReject
+
+AnalyzeMatch:
+  description: >
+    Evaluate the compatibility between the following job requirements and candidate profiles.
+
+    - Job Requirements (Skills): {JOBSKILLS}
+    - Candidate Data: {CANDIDATESKILLS}
+
+    For each candidate, compare their skills to the required job skills. Identify those who match well,
+    and rank them from highest to lowest based on match quality. Consider both exact matches and related skills.
+
+    Return the result as plain text, listing the most viable candidates first, and include a brief explanation if needed.
+  expected_output: >
+    A plain text (.txt) report listing the names of the top-matching candidates, optionally with brief explanations of their suitability.
+  agent: MatchingAnalyser
+  async_execution: False
+
+
+AnalyzeJob:
+  description: >
+    Analyze the following job description: {JobDescription}. 
+    Carefully read the entire description and extract all relevant expectations for the candidate. 
+    Start by identifying important keywords and phrases related to tools, technologies, behaviors, qualifications, responsibilities, and outcomes. 
+    Map those to standardized, CV-friendly names and group them into the following categories:\n
+    - 'technical_skills' – Specific tools, technologies, systems, certifications, programming languages, or domain knowledge.\n
+    - 'soft_skills' – Behavioral or interpersonal abilities such as teamwork, communication, or adaptability.\n
+    Return the output as a JSON object with these five keys.
+  expected_output: > 
+    A .txt file in the following format:\n
+    {\n"
+    '  "technical_skills": ["Skill 1", "Skill 2", ...],\n'
+    '  "soft_skills": ["Skill A", "Skill B", ...],\n'
+    "}"
+  agent: JobAnalyser
+  async_execution: False
+
+

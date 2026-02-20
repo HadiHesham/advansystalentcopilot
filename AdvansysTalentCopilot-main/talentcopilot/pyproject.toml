@@ -1,0 +1,26 @@
+[project]
+name = "talentcopilot"
+version = "0.1.0"
+description = "TalentCopilot using crewAI"
+authors = [{ name = "Your Name", email = "you@example.com" }]
+requires-python = ">=3.10,<3.14"
+dependencies = [
+    "crewai[tools]>=0.148.0,<1.0.0",
+    "psycopg2-binary>=2.9.0",
+    "loguru>=0.7.0",
+    "mcp>=1.0.0"
+]
+
+[project.scripts]
+talentcopilot = "talentcopilot.main:run"
+run_crew = "talentcopilot.main:run"
+train = "talentcopilot.main:train"
+replay = "talentcopilot.main:replay"
+test = "talentcopilot.main:test"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.crewai]
+type = "crew"

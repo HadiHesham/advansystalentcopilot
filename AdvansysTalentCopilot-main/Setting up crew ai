@@ -1,0 +1,29 @@
+import warnings
+
+warnings.filterwarnings("ignore")
+from crewai import Agent,Task,Crew
+from langchain_community.llms import Cohere
+import os
+os.environ["COHERE_API_KEY"] = "Enter an api key" (the link to create the api key free trial: "https://dashboard.cohere.com/api-keys")
+
+
+cohere_llm = Cohere(
+    model="command-r-plus",
+    temperature=0.7,
+    max_tokens=1024
+)
+
+planner = Agent(
+    role="Content Planner",
+    goal="Plan engaging and factually accurate content on {topic}",
+    backstory="You're working on planning a blog article "
+              "about the topic: {topic}."
+              "You collect information that helps the "
+              "audience learn something "
+              "and make informed decisions. "
+              "Your work is the basis for "
+              "the Content Writer to write an article on this topic.",
+    allow_delegation=False,
+    verbose=True,
+    llm=cohere_llm (pass this variable)
+)
